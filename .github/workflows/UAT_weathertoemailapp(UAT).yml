@@ -40,4 +40,13 @@ jobs:
         slot-name: 'UAT'
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_084720d9cdbd4e9f944a2ee7915f691e }}
+        
+    - name: 'Run Azure Functions Action'
+      uses: Azure/functions-action@v1
+      id: fa2
+      with:
+        app-name: 'weathertoemailapp'
+        slot-name: 'PRODUCTION'
+        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_084720d9cdbd4e9f944a2ee7915f691e }}     
   
