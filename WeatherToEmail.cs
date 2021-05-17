@@ -61,7 +61,7 @@ namespace WeatherToEmail
                         message.Subject = $"Clima agora: {DateTime.Now.ToLocalTime():dd/MM/yyyy hh:mm}";
 
                         string clima = $"Tempo na cidade de {weatherResponse.Name} - {weatherResponse.State}\n" +
-                                       $"----------------------------------------------------------------------\n" +
+                                       $"------------------------------------------------------------------\n" +
                                        $"Temperatura: {weatherResponse.Data.Temperature}°C\n" +
                                        $"Humidade: {weatherResponse.Data.Humidity}%\n" +
                                        $"Condição: {weatherResponse.Data.Condition}\n" +
@@ -76,8 +76,7 @@ namespace WeatherToEmail
             }
             catch (Exception e)
             {
-                log.LogError(e.Message);
-                Console.WriteLine(e);
+                log.LogError(e.Message, e.StackTrace);
                 throw;
             }
         }
