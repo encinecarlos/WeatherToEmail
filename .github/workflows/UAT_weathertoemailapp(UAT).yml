@@ -20,9 +20,6 @@ jobs:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v2
   
-    - name: 'Automatic Merge'  
-      uses: lots0logs/gh-action-auto-merge@1.0.0
-
     - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
       uses: actions/setup-dotnet@v1
       with:
