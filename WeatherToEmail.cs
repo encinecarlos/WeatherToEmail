@@ -53,15 +53,15 @@ namespace WeatherToEmail
                         MailAddress from = new MailAddress(mailFrom, "Carlos Encine");
                         MailAddress to = new MailAddress("carlos_alexandre88@hotmail.com", "destination");
 
-                        mailClient.Host = mailServer ?? "mail.carlosencine.com";
+                        mailClient.Host = mailServer;
                         mailClient.UseDefaultCredentials = false;
                         mailClient.Credentials = basicCredentials;
                         message.From = from;
                         message.To.Add(to);
-                        message.Subject = $"Clima agora: {DateTime.Now:dd/MM/yyyy hh:mm}";
+                        message.Subject = $"Clima agora: {DateTime.Now.ToLocalTime():dd/MM/yyyy hh:mm}";
 
                         string clima = $"Tempo na cidade de {weatherResponse.Name} - {weatherResponse.State}\n" +
-                                       $"----------------------------------------------------------------------\n" +
+                                       $"------------------------------------------------------------------\n" +
                                        $"Temperatura: {weatherResponse.Data.Temperature}°C\n" +
                                        $"Humidade: {weatherResponse.Data.Humidity}%\n" +
                                        $"Condição: {weatherResponse.Data.Condition}\n" +
@@ -76,8 +76,7 @@ namespace WeatherToEmail
             }
             catch (Exception e)
             {
-                log.LogError(e.Message);
-                Console.WriteLine(e);
+                log.LogError(e.Message, e.StackTrace);
                 throw;
             }
         }
