@@ -18,16 +18,19 @@ namespace WeatherToEmail
             try
             {
                 log.LogInformation("Send weather information to e-mail");
-
-                var client = new HttpClient();
-
-                client.BaseAddress = new Uri("http://apiadvisor.climatempo.com.br");
-
+                
                 var local = Environment.GetEnvironmentVariable("locale");
                 var token = Environment.GetEnvironmentVariable("token_api");
                 var mailFrom = Environment.GetEnvironmentVariable("mail_from");
+                var mailTo = Environment.GetEnvironmentVariable("mail_to");
                 var mailServer = Environment.GetEnvironmentVariable("mail_smtp");
                 var mailPass = Environment.GetEnvironmentVariable("mail_pass");
+                var urlBase = Environment.GetEnvironmentVariable("weather_url");
+
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
 
                 var response = client.GetAsync($"/api/v1/weather/locale/{local}/current?token={token}");
                 response.Wait();
@@ -51,14 +54,18 @@ namespace WeatherToEmail
                     using (var message = new MailMessage())
                     {
                         MailAddress from = new MailAddress(mailFrom, "Carlos Encine");
-                        MailAddress to = new MailAddress("carlos_alexandre88@hotmail.com", "destination");
+                        MailAddress to = new MailAddress(mailTo, "destination");
 
-                        mailClient.Host = mailServer ?? "mail.carlosencine.com";
+                        mailClient.Host = mailServer;
                         mailClient.UseDefaultCredentials = false;
                         mailClient.Credentials = basicCredentials;
+
+                        var weatherDate = Convert.ToDateTime(weatherResponse.Data.Date);
+
+                        
                         message.From = from;
                         message.To.Add(to);
-                        message.Subject = $"Clima agora: {DateTime.Now:dd/MM/yyyy hh:mm}";
+                        message.Subject = $"Clima agora: {weatherDate:dd/MM/yyyy hh:mm}";
 
                         string clima = $"Tempo na cidade de {weatherResponse.Name} - {weatherResponse.State}\n" +
                                        $"----------------------------------------------------------------------\n" +
