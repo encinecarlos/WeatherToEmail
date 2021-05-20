@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace WeatherBasic.Weather
+namespace WeatherToEmail.Weather
 {
     class WeatherResult
     {

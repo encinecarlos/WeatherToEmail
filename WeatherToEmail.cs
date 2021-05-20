@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
-using WeatherBasic.Weather;
+using WeatherToEmail.Weather;
 
 namespace WeatherToEmail
 {
