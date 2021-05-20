@@ -16,17 +16,7 @@ env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '3.1.301'
 
-jobs:
-  automerge:
-    runs-on: windows-latest
-    steps:
-      - uses: reitermarkus/automerge@v1.5.2
-        with:
-          token: ${{ secrets.MERGE_TOKEN }}
-          merge-method: merge
-          do-not-merge-labels: never-merge
-          dry-run: true
-          
+jobs:          
   build-and-deploy:
     runs-on: windows-latest
     steps:        
@@ -54,3 +44,12 @@ jobs:
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_084720d9cdbd4e9f944a2ee7915f691e }}             
   
+  automerge:
+      runs-on: windows-latest
+      steps:
+        - uses: reitermarkus/automerge@v1.5.2
+          with:
+            token: ${{ secrets.MERGE_TOKEN }}
+            merge-method: merge
+            do-not-merge-labels: never-merge
+            dry-run: true
