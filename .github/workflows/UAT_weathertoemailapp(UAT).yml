@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
 name: Build and deploy dotnet core app to Azure Function App - weathertoemailapp(UAT)
-
+# SHA256:xvcY0Je7/gjPeD5J4sPHQOuMqwWy9+ZdC4z9OG7jXPw
 on:
   push:
     branches:
@@ -17,9 +17,19 @@ env:
   DOTNET_VERSION: '3.1.301'  # set this to the dotnet version to use
 
 jobs:
-  build-and-deploy:
+  automerge:
     runs-on: windows-latest
     steps:
+      - uses: reitermarkus/automerge@v2
+        with:
+          token: ${{ secrets.MERGE_TOKEN }}
+          merge-method: merge
+          do-not-merge-labels: never-merge
+          dry-run: true
+          
+  build-and-deploy:
+    runs-on: windows-latest
+    steps:        
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v2
   
