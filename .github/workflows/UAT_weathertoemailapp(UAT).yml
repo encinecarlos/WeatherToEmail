@@ -40,7 +40,7 @@ jobs:
       id: fa
       with:
         app-name: 'weathertoemailapp'
-        slot-name: 'UAT'
+        slot-name: 'PRODUCTION'
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_084720d9cdbd4e9f944a2ee7915f691e }}             
   
