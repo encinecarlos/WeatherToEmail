@@ -45,7 +45,6 @@ namespace WeatherToEmail
                     readResult.Wait();
 
                     weatherResponse = readResult.Result;
-
                 }
 
                 using (var mailClient = new SmtpClient(mailServer))
@@ -62,7 +61,6 @@ namespace WeatherToEmail
 
                         var weatherDate = Convert.ToDateTime(weatherResponse.Data.Date);
 
-                        
                         message.From = from;
                         message.To.Add(to);
                         message.Subject = $"Clima agora: {weatherDate:dd/MM/yyyy hh:mm}";
@@ -83,7 +81,7 @@ namespace WeatherToEmail
             }
             catch (Exception e)
             {
-                log.LogError(e.Message);
+                log.LogError(e.Message, e.StackTrace);
                 Console.WriteLine(e);
                 throw;
             }
