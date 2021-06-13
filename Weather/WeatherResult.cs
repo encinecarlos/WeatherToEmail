@@ -2,7 +2,7 @@
 
 namespace WeatherToEmail.Weather
 {
-    class WeatherResult
+    public class WeatherResult
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
