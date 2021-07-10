@@ -1,8 +1,6 @@
-﻿using System;
-using System.Net;
-using System.Net.Mail;
-using SendGrid;
+﻿using SendGrid;
 using SendGrid.Helpers.Mail;
+using System;
 using WeatherToEmail.Weather;
 
 namespace WeatherToEmail.Services
