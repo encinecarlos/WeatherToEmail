@@ -12,7 +12,7 @@ namespace WeatherToEmail.Services
         private string MailFrom { get; set; }
         private string MailTo { get; set; }
         public string ApiKey { get; set; }
-        
+
         public SendMessage()
         {
             MailFrom = Environment.GetEnvironmentVariable("mail_from");
@@ -78,7 +78,6 @@ namespace WeatherToEmail.Services
             //        message.Body = clima;
             //        mailClient.Send(message);
             //    }
-        }
         }
     }
 }
